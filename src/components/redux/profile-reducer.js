@@ -1,5 +1,6 @@
 const ADD_NEW_POST = "ADD-NEW-POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
+const SET_USER_PROFILE = 'SET_USER_PROFILE';
 
 let initialState = {
   
@@ -8,7 +9,8 @@ let initialState = {
       { id: 2, message: "how are you!", likesCounte: 20 },
       { id: 3, message: "Very vell!", likesCounte: 18 }
     ],
-    newPostText: "it-lesson"
+    newPostText: "it-lesson",
+    profile: null
   
 };
 
@@ -38,19 +40,19 @@ const profileReducer = (state = initialState, action) => {
         ...state,
         newPostText: action.newText
       }
-      
-    
-    // {
-    //   let stateCopy = {...state};
-    //   stateCopy.newPostText = action.newText;
-    //   return stateCopy;
-    // }
+    case SET_USER_PROFILE:
+      return {
+        ...state,
+        profile: action.profile
+      }
+
     default:
       return state;
   }
 };
 
 export const addPostActionCreator = () => ({ type: ADD_NEW_POST });
+export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile });
 export const updateNewPostTextActionCreator = text => ({
   type: UPDATE_NEW_POST_TEXT,
   newText: text

@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import Header from "./components/header/Header";
 import Navbar from "./components/nav/Navbar";
-import Content from "./components/content/Content";
+import ProfileContainer from "./components/content/profileContainer";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import { Route } from "react-router-dom";
 import Musik from "./components/musik/musik";
@@ -24,9 +24,7 @@ const App = props => {
           <Route
             path="/content"
             render={() => (
-              <Content
-                store={props.store} 
-              />
+              <ProfileContainer />
             )}
           />
           <Route

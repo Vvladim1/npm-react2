@@ -3,13 +3,11 @@ import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import Profile from "./profile/Profile";
 
 const Content = props => {
-  
+  debugger;
   return (
     <div>
-      <Profile />
-      <MyPostsContainer
-        store={props.store}
-      />
+      <Profile profile={props.profile} />
+      <MyPostsContainer store={props.store} />
     </div>
   );
 };
