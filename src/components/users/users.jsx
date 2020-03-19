@@ -5,7 +5,6 @@ import { NavLink } from "react-router-dom";
 import * as axios from "axios";
 
 const Users = props => {
-  // debugger;
   let pageCount = Math.ceil(props.totalUsersCount / props.pageSize);
   let pages = [];
   for (let i = 1; i <= pageCount; i++) {
@@ -76,7 +75,6 @@ const Users = props => {
                       .then(response => {
 
                         if (response.data.resultCode == 0) {
-                          // debugger;
                           props.follow(u.id);
                         }
                       });

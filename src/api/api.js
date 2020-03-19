@@ -1,7 +1,10 @@
 import * as axios from "axios";
 
-const userUrl = 'https://social-network.samuraijs.com/api/1.0/';
+export const getUsers = (currentPage=1, pageSize=10) => {
+return axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${pageSize}`, {
+  withCredentials: true
+})
+.then(response => response.data)// returned only response.data from response-object
+}
 
-export const pathUrl = () => {
-  return userUrl;
-  }
+
