@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import * as axios from "axios";
 import Users from './users'
 import Preloader from "../common/preload/preload";
-import {getUsers} from '../../api/api'
+import {userAPI} from '../../api/api'
 
 class UsersContainer extends React.Component {
 
@@ -12,7 +12,7 @@ class UsersContainer extends React.Component {
     if (this.props.users.length === 0) {
       this.props.toggleIsFetching(true);
     
-      getUsers(this.props.currentPage, this.props.pageSize)
+      userAPI.getUsers(this.props.currentPage, this.props.pageSize)
       .then(data => {
         debugger;
         this.props.toggleIsFetching(false);
@@ -26,13 +26,13 @@ class UsersContainer extends React.Component {
   onPageChanged = (pageNumber) => {
     this.props.setCurrentPage(pageNumber);
     this.props.toggleIsFetching(true);
-    getUsers(pageNumber, this.props.pageSize)
+    userAPI.getUsers(pageNumber, this.props.pageSize)
       .then(data => {
         this.props.toggleIsFetching(false);
         this.props.setUsers(data.items);
       });
     }
-    
+
   render() {
     return (
       <>
