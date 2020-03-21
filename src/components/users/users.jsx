@@ -29,7 +29,7 @@ const Users = props => {
           <div className={styles.wrapper}>
             <div>
               <NavLink to={/content/ + u.id}>
-                <img
+                <img alt='user-face'
                   src={u.photos.small != null ? u.photos.small : userPhoto}
                   className={styles.userPhoto}
                 />
@@ -37,8 +37,10 @@ const Users = props => {
             </div>
             <div>
               {u.followed ? (
-                <button
+                <button disabled={props.followingInProgress.some(id => id === u.id)} 
                   onClick={() => {
+                    // debugger;
+                    props.toggleFollowingProgress(true, u.id);
                     axios
                     .delete(
                       `https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
@@ -50,17 +52,20 @@ const Users = props => {
                       }
                     )
                     .then(response => {
-                      if(response.data.resultCode == 0) {
+                      if(response.data.resultCode === 0) {
                         props.unfollow(u.id);
                       }
+                      props.toggleFollowingProgress(false, u.id);
                     })
                   }}
                 >
                   unfollowe
                 </button>
               ) : (
-                <button
+                <button disabled={props.followingInProgress.some(id => id === u.id)} 
                   onClick={() => {
+
+                    props.toggleFollowingProgress(true, u.id);
                     axios
                       .post(
                         `https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
@@ -73,10 +78,10 @@ const Users = props => {
                         }
                       )
                       .then(response => {
-
-                        if (response.data.resultCode == 0) {
+                        if (response.data.resultCode === 0) {
                           props.follow(u.id);
                         }
+                        props.toggleFollowingProgress(false, u.id);
                       });
                   }}
                 >
